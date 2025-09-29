@@ -26,6 +26,17 @@ layout: default
       {% endif %}
     </header>
 
+    {% if page.preview_pdf and page.cv_pdf %}
+      {% capture pdf_url %}{% if page.cv_pdf contains '://' %}{{ page.cv_pdf }}{% else %}{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}{% endif %}{% endcapture %}
+      <div class="pdf-preview mt-3">
+        <object data="{{ pdf_url }}" type="application/pdf" width="100%" height="{{ page.preview_height | default: 900 }}">
+          <iframe src="{{ pdf_url }}" width="100%" height="{{ page.preview_height | default: 900 }}"></iframe>
+        </object>
+        <p class="mt-2"><a href="{{ pdf_url }}" target="_blank" rel="noopener noreferrer">Open the PDF</a></p>
+      </div>
+    {% endif %}
+
+    {% unless page.only_pdf %}
     <article>
       <div class="cv">
         {% for entry in site.data.cv %}
@@ -51,6 +62,7 @@ layout: default
         {% endfor %}
       </div>
     </article>
+    {% endunless %}
   </div>
 {% else %}
   <div class="post">
@@ -77,6 +89,17 @@ layout: default
       {% endif %}
     </header>
 
+    {% if page.preview_pdf and page.cv_pdf %}
+      {% capture pdf_url %}{% if page.cv_pdf contains '://' %}{{ page.cv_pdf }}{% else %}{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}{% endif %}{% endcapture %}
+      <div class="pdf-preview mt-3">
+        <object data="{{ pdf_url }}" type="application/pdf" width="100%" height="{{ page.preview_height | default: 900 }}">
+          <iframe src="{{ pdf_url }}" width="100%" height="{{ page.preview_height | default: 900 }}"></iframe>
+        </object>
+        <p class="mt-2"><a href="{{ pdf_url }}" target="_blank" rel="noopener noreferrer">Open the PDF</a></p>
+      </div>
+    {% endif %}
+
+    {% unless page.only_pdf %}
     <article>
       <div class="cv">
         {% for data in site.data.resume %}
@@ -123,5 +146,6 @@ layout: default
         {% endfor %}
       </div>
     </article>
+    {% endunless %}
   </div>
 {% endunless %}
