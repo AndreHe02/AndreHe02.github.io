@@ -1,3 +1,7 @@
 <div class="publications">
-  {% bibliography --group_by none --query @*[selected=true]* %}
+  {% comment %}Selected papers are presented in editorial priority order.{% endcomment %}
+  {% bibliography --group_by none --query @*[selected=true && selected_order=1]* %}
+  {% bibliography --group_by none --query @*[selected=true && selected_order=2]* %}
+  {% bibliography --group_by none --query @*[selected=true && selected_order=3]* %}
+  {% bibliography --group_by none --query @*[selected=true && selected_order=4]* %}
 </div>
